@@ -19,14 +19,13 @@ class BundleTree extends Equatable {
   }
 
   void forEachDepthFirst(
-    void Function(BundleTree node) performAction,
-  ) {
-    performAction(this);
+    void Function(BundleTree node, int? rep) performAction, [
+    int? multiplier,
+  ]) {
+    performAction(this, multiplier);
 
     for (var child in children) {
-      child.forEachDepthFirst(
-        performAction,
-      );
+      child.forEachDepthFirst(performAction, this.multiplier);
     }
   }
 
@@ -36,27 +35,19 @@ class BundleTree extends Equatable {
 
   int _calculateProductionCapForBundle(BundleTree bundletree) {
     int? productionCap;
-    int skippingCount = 0;
 
-    bundletree.forEachDepthFirst((currentBundle) {
-      if (currentBundle == bundletree || skippingCount > 0) {
-        skippingCount--;
-        return;
-      }
-
+    bundletree.forEachDepthFirst((currentBundle, parentMultiplier) {
       if (currentBundle.value is! Component) {
-        skippingCount = currentBundle.children.length;
-        final nestedBundleCap = _calculateProductionCapForBundle(currentBundle);
-
-        productionCap = replaceProductionCap(productionCap, nestedBundleCap);
-
         return;
       }
 
       final bundleMultiplier = currentBundle.multiplier;
       final component = currentBundle.value as Component;
+
+      final currentMultiplier = bundleMultiplier * (parentMultiplier ?? 1);
+
       final partsWithMultiplier =
-          (component.remainingParts / bundleMultiplier).round();
+          (component.remainingParts / currentMultiplier).round();
 
       productionCap = replaceProductionCap(productionCap, partsWithMultiplier);
     });

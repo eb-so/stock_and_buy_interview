@@ -13,7 +13,7 @@ void main(List<String> args) {
   wheel.add(BundleTree(Component('frame', 60)));
   wheel.add(BundleTree(Component('tube', 35)));
 
-  bundleTree.forEachDepthFirst((node) {
-    print(node.value);
-  });
+  // bundleTree.forEachDepthFirst((node) {
+  //   print(node.value);
+  // });
 }
