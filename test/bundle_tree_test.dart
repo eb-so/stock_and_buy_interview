@@ -8,7 +8,7 @@ void main() {
   group('BundleTreeTest -', () {
     group('calculateProductionCap -', () {
       test(
-          'When bundle require one part, Bundle avaliableParts Should be equal to the part avaliableParts',
+          'When bike requires one compnent, Bike production cap should be the compnent production cap',
           () {
         final bike = BundleTree(Bundle(
           'bike',
@@ -18,7 +18,7 @@ void main() {
         expect(bike.calculateProductionCap(), 20);
       });
       test(
-          'When bundle require two part, Should stop at the fewest parts amount',
+          'When bundle require two parts, Should stop at the fewest parts amount',
           () {
         final bike = BundleTree(Bundle(
           'bike',
@@ -28,20 +28,22 @@ void main() {
         bike.add(BundleTree(Component('steering wheel', 10)));
         expect(bike.calculateProductionCap(), 10);
       });
-      test('When there three parts, Should stop at the fewest parts amount',
+      test(
+          'When there a component that has a multiplier, Should devide the number of components on the multiplier',
           () {
         final bike = BundleTree(Bundle(
           'bike',
         ));
 
         bike.add(BundleTree(Component('body', 20)));
-        bike.add(BundleTree(Component('steering wheel', 10)));
-        bike.add(BundleTree(Component('seat', 2)));
-        expect(bike.calculateProductionCap(), 2);
+        bike.add(BundleTree(Component('steering wheel', 10), multiplier: 2));
+        bike.add(BundleTree(Component('seat', 6)));
+
+        expect(bike.calculateProductionCap(), 5);
       });
 
       test(
-          'When you have another bundel inside your bunder, Should calculate the outcome of that bundel',
+          'When you have another bundel inside your bundle, Should apply the multiplier to the children components',
           () {
         final bike = BundleTree(Bundle('bike'));
 

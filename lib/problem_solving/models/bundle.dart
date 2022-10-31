@@ -1,14 +1,7 @@
-import 'package:equatable/equatable.dart';
-
-class Bundle extends Equatable {
+class Bundle {
   final String name;
 
   const Bundle(this.name);
-
-  @override
-  List<Object?> get props => [
-        name,
-      ];
 }
 
 class Component extends Bundle {
