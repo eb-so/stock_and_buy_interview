@@ -1,6 +1,8 @@
+import 'package:equatable/equatable.dart';
+
 import 'models/bundle.dart';
 
-class BundleTree {
+class BundleTree extends Equatable {
   BundleTree(
     this.value, {
     this.multiplier = 1,
@@ -16,46 +18,59 @@ class BundleTree {
     return node;
   }
 
-  void forEachDepthFirst(void Function(BundleTree node) performAction) {
+  void forEachDepthFirst(
+    void Function(BundleTree node) performAction,
+  ) {
     performAction(this);
 
     for (var child in children) {
-      child.forEachDepthFirst(performAction);
+      child.forEachDepthFirst(
+        performAction,
+      );
     }
   }
 
   int calculateProductionCap() {
-    int? tempAvailablePart;
+    return _calculateProductionCapForBundle(this);
+  }
 
-    forEachDepthFirst((node) {
-      if (node.value is! Component) return;
-      final component = node.value as Component;
+  int _calculateProductionCapForBundle(BundleTree bundletree) {
+    int? productionCap;
+    int skippingCount = 0;
 
-      if (tempAvailablePart == null ||
-          component.remainingParts < tempAvailablePart!) {
-        tempAvailablePart = component.remainingParts;
-        node = _removeUsedParts(node);
+    bundletree.forEachDepthFirst((currentBundle) {
+      if (currentBundle == bundletree || skippingCount > 0) {
+        skippingCount--;
+        return;
       }
+
+      if (currentBundle.value is! Component) {
+        skippingCount = currentBundle.children.length;
+        final nestedBundleCap = _calculateProductionCapForBundle(currentBundle);
+
+        productionCap = replaceProductionCap(productionCap, nestedBundleCap);
+
+        return;
+      }
+
+      final bundleMultiplier = currentBundle.multiplier;
+      final component = currentBundle.value as Component;
+      final partsWithMultiplier =
+          (component.remainingParts / bundleMultiplier).round();
+
+      productionCap = replaceProductionCap(productionCap, partsWithMultiplier);
     });
 
-    return tempAvailablePart ?? 0;
+    return productionCap ?? 0;
   }
 
-  // BundleTree _removeUsedParts(BundleTree node) {
-  //   final nodeMultiplier = node.multiplier;
-
-  //   return node.copyWith(avaliableParts: node.avaliableParts! - nodeMultiplier);
-  // }
-
-  BundleTree copyWith({
-    Bundle? value,
-    int? multiplier,
-    int? avaliableParts,
-    List<BundleTree>? children,
-  }) {
-    return BundleTree(
-      value ?? this.value,
-      multiplier: multiplier ?? this.multiplier,
-    );
+  int? replaceProductionCap(int? firstPartToBeOut, int partsWithMultiplier) {
+    if (firstPartToBeOut == null || partsWithMultiplier < firstPartToBeOut) {
+      firstPartToBeOut = partsWithMultiplier;
+    }
+    return firstPartToBeOut;
   }
+
+  @override
+  List<Object?> get props => [value, multiplier];
 }
