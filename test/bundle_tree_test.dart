@@ -15,6 +15,7 @@ void main() {
         ));
 
         bike.add(BundleTree(Component('body', 20)));
+
         expect(bike.calculateProductionCap(), 20);
       });
       test(
@@ -26,6 +27,7 @@ void main() {
 
         bike.add(BundleTree(Component('body', 20)));
         bike.add(BundleTree(Component('steering wheel', 10)));
+
         expect(bike.calculateProductionCap(), 10);
       });
       test(
