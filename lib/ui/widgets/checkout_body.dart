@@ -15,7 +15,7 @@ class CheckoutBody extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.grey[300],
       appBar: AppBar(
-        iconTheme: const IconThemeData(color: Colors.deepPurple),
+        iconTheme: IconThemeData(color: Theme.of(context).primaryColor),
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
         shadowColor: Colors.white,

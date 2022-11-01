@@ -15,7 +15,7 @@ class CollectionsBody extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
-        iconTheme: const IconThemeData(color: Colors.deepPurple),
+        iconTheme: IconThemeData(color: Theme.of(context).primaryColor),
         shadowColor: Colors.white,
         centerTitle: true,
         title: Row(
@@ -50,9 +50,10 @@ class CollectionsBody extends StatelessWidget {
                   color: Colors.white, borderRadius: BorderRadius.circular(4)),
               width: double.infinity,
               alignment: Alignment.center,
-              child: const Text(
+              child: Text(
                 'Quick sale',
-                style: TextStyle(color: Colors.deepPurple, fontSize: 16),
+                style: TextStyle(
+                    color: Theme.of(context).primaryColor, fontSize: 16),
               ),
             ),
             UiHelpers.smallSpace,

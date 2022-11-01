@@ -17,9 +17,9 @@ class ChargeCard extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Text(
+            Text(
               'Add discount',
-              style: TextStyle(color: Colors.deepPurple),
+              style: TextStyle(color: Theme.of(context).primaryColor),
             ),
             const Icon(Icons.add_circle_outline_outlined)
           ],
@@ -50,9 +50,9 @@ class ChargeCard extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text(
+              Text(
                 'Add shipping',
-                style: TextStyle(color: Colors.deepPurple),
+                style: TextStyle(color: Theme.of(context).primaryColor),
               ),
               const Icon(Icons.add_circle_outline_outlined)
             ],
@@ -66,7 +66,8 @@ class ChargeCard extends StatelessWidget {
                 child: Container(
                   alignment: Alignment.center,
                   padding: const EdgeInsets.symmetric(vertical: 16),
-                  decoration: const BoxDecoration(color: Colors.deepPurple),
+                  decoration:
+                      BoxDecoration(color: Theme.of(context).primaryColor),
                   child: const Text(
                     '5',
                     style: TextStyle(color: Colors.white, fontSize: 18),
@@ -79,7 +80,8 @@ class ChargeCard extends StatelessWidget {
                 child: Container(
                   alignment: Alignment.center,
                   padding: const EdgeInsets.symmetric(vertical: 16),
-                  decoration: const BoxDecoration(color: Colors.deepPurple),
+                  decoration:
+                      BoxDecoration(color: Theme.of(context).primaryColor),
                   child: const Text(
                     'Charge \$389.22',
                     style: TextStyle(color: Colors.white, fontSize: 18),

@@ -27,11 +27,11 @@ class CustomerCard extends StatelessWidget {
           children: [
             Text(
               name,
-              style: const TextStyle(color: Colors.deepPurple),
+              style: TextStyle(color: Theme.of(context).primaryColor),
             ),
             Text(
               email,
-              style: const TextStyle(color: Colors.deepPurple),
+              style: TextStyle(color: Theme.of(context).primaryColor),
             ),
           ],
         )
