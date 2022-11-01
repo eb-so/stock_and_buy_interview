@@ -1,16 +1,10 @@
 # stock_and_buy_interview
 
-A new Flutter project.
+## Problem solving part
 
-## Getting Started
+- Run the unit tests in `test/bundle_tree_test.dart`
 
-This project is a starting point for a Flutter application.
+## Ui part
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Tested on macOs 13' screen
+  ![Alt text](macos_screenshot.png "Screenshot")
